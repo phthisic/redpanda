@@ -1,0 +1,147 @@
+*{
+    margin: 0;
+    padding: 0;
+    color: black;
+}
+/* iphone6 7 8 */
+
+body {  
+    background-color: yellow;
+}
+
+/* iphone 5 */
+
+@media screen and (max-width: 320px) {
+    body {
+        background-color: white;
+    }
+}
+
+/* iphoneX */
+
+@media screen and (min-width: 375px) and (-webkit-device-pixel-ratio: 3) {
+    body {
+        background-color: #0FF000;
+    }
+}
+
+/* iphone6 7 8 plus */
+
+@media screen and (min-width: 414px) {
+    body {
+        background-color: white;
+    }
+}
+
+/* ipad */
+
+@media screen and (min-width: 768px) {
+    body {
+        background-color: green;
+    }
+}
+
+/* ipad pro */
+
+@media screen and (min-width: 1024px) {
+    body {
+        background-color: #FF00FF;
+    }
+}
+
+/* pc */
+
+@media screen and (min-width: 1100px) {
+    body {
+        background-color: black;
+    }
+}
+
+/* title */
+#back a img{
+    width: 40px;
+    margin: 20px 0 0 20px;
+}
+
+#logo{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    margin-top: 3.5em;
+    font-family:Roboto;
+    font-size:35px; 
+    opacity: 60%;
+}
+
+#type{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    margin-top: 5.2em;
+}
+
+
+.input_control{
+    width:280px;
+    height: 50px;
+    margin:15px auto;
+}
+
+input[type="text"],input[type="password"]{
+    box-sizing: border-box;
+    text-align:center;
+    font-size:1em;
+    height:3em;
+    width: 5em;
+    border-radius:4px;
+    border:1.5px solid #ececec;
+    color:#6a6f77;
+    -moz-appearance: none;
+    display:block;
+    outline:0;
+    padding:0 1em;
+    text-decoration:none;
+    text-align: left;
+    width:100%;
+}
+
+input[type="button"]{
+    margin-top: 35px;
+    box-sizing: border-box;
+    text-align:center;
+    font-size:1em;
+    height:2.5em;
+    width: 5em;
+    border-radius:4px;
+    border:1.5px solid #789FEC;
+    background-color:#789FEC ;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    -moz-appearance: none;
+    display:block;
+    outline:0;
+    padding:0 1em;
+    text-decoration:none;
+    width:100%;
+    box-shadow: 0px 2px 3px 0 #566b96;
+}
+
+.input_control a{
+    text-decoration:none;
+}
+
+input:focus {
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 5px #9ecaed;
+}
+
+#supportlink a{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    color: #789FEC;
+    opacity: 60%;
+}
+
