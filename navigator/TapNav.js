@@ -3,7 +3,7 @@ import {Text} from 'react-native';
 
 import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator, BottomTabBar} from 'react-navigation-tabs';
-import schedule from '../pages/schedule';
+// import schedule from '../pages/schedule';
 import healthdata from '../pages/healthdata';
 import settingpage from '../pages/settingpage';
 

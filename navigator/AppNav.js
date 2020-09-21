@@ -4,17 +4,22 @@ import {Text} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
-import login from '../pages/login'
+import welcome from '../loginModule/welcome'
 // import schedule from '../pages/schedule'
 import MainTabNavigator from './TapNav';
 
 const LoginNavigation = createStackNavigator({
-    Login: login,
+    welcome:{
+        screen: welcome,
+        navigationOptions:{
+            headerShown: false,
+        }
+    },
     Home:{
         screen:MainTabNavigator
     }
 },{
-    initialRouteName:'Login'
+    initialRouteName:'welcome'
 });
 
 const AppContainer = createAppContainer(LoginNavigation);
