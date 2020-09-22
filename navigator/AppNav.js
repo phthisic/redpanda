@@ -7,9 +7,9 @@ import {createStackNavigator} from 'react-navigation-stack';
 import welcome from '../loginModule/welcome'
 // import schedule from '../pages/schedule'
 import MainTabNavigator from './TapNav';
+import LoginContainer from '../loginModule/loginNav'
 
-
-const LoginNavigation = createStackNavigator({
+const AppNavigation = createStackNavigator({
     welcome:{
         screen: welcome,
         navigationOptions:{
@@ -18,11 +18,18 @@ const LoginNavigation = createStackNavigator({
     },
     Home:{
         screen:MainTabNavigator
+    },
+    login:{
+        screen:LoginContainer,
+        navigationOptions:{
+            // title:"Create a new account",
+            headerShown: false,
+        }
     }
 },{
     initialRouteName:'welcome'
 });
 
-const AppContainer = createAppContainer(LoginNavigation);
+const AppContainer = createAppContainer(AppNavigation);
 
 export default AppContainer;

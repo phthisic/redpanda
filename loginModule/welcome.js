@@ -41,10 +41,10 @@ export default class welcome extends Component {
         this.setState({
           time: time,
         });
-        console.log(time);
+        // console.log(time);
       } else {
         clearInterval(timeChange);
-        
+
         //animation
         Animated.spring(this.state.pillScale, {
           toValue: 0.7,
@@ -69,12 +69,26 @@ export default class welcome extends Component {
   }
 
   // four functions to change the color of the TextInput
-  changeAccountColorBlue = () => {this.setState({accountColor: '#779EEB'});};
-  changePasswordColorBlue = () => {this.setState({passwordColor: '#779EEB'});};
-  changeAccountColorGrey = () => {if (this.state.user_text == '') {this.setState({accountColor: '#F55F5F'});} 
-    else {this.setState({accountColor: '#e0e0e0'});}};
-  changePasswordColorGrey = () => {if (this.state.pass_text == '') {this.setState({passwordColor: '#F55F5F'});} 
-    else {this.setState({passwordColor: '#e0e0e0'});}};
+  changeAccountColorBlue = () => {
+    this.setState({accountColor: '#779EEB'});
+  };
+  changePasswordColorBlue = () => {
+    this.setState({passwordColor: '#779EEB'});
+  };
+  changeAccountColorGrey = () => {
+    if (this.state.user_text == '') {
+      this.setState({accountColor: '#F55F5F'});
+    } else {
+      this.setState({accountColor: '#e0e0e0'});
+    }
+  };
+  changePasswordColorGrey = () => {
+    if (this.state.pass_text == '') {
+      this.setState({passwordColor: '#F55F5F'});
+    } else {
+      this.setState({passwordColor: '#e0e0e0'});
+    }
+  };
 
   // 1. navigate to the tabNav, which is the schedule page
   // 2. pass the userId to tabNav
@@ -91,6 +105,11 @@ export default class welcome extends Component {
     }
   };
 
+  returnData(id, password) {
+    // console.log(id + password);
+    this.setState({user_text: id, pass_text: password});
+  }
+
   render() {
     return (
       <Animated.View
@@ -98,7 +117,7 @@ export default class welcome extends Component {
           styles.container,
           {paddingBottom: this.state.containerPadding, zIndex: -100},
         ]}>
-          {/* icon picture and title */}
+        {/* icon picture and title */}
         <Animated.View
           style={{
             transform: [{scale: this.state.pillScale}],
@@ -117,7 +136,7 @@ export default class welcome extends Component {
             backgroundColor: '#fff',
             opacity: this.state.buttonOpacity,
           }}>
-            {/* two box for user to input */}
+          {/* two box for user to input */}
           <TextInput
             style={[styles.inputBox, {borderColor: this.state.accountColor}]}
             placeholder="Account"
@@ -134,7 +153,7 @@ export default class welcome extends Component {
             onChangeText={(pass_text) =>
               this.setState({pass_text})
             }></TextInput>
-            
+
           <View style={{justifyContent: 'space-around', alignItems: 'center'}}>
             {/* login button */}
             <TouchableOpacity
@@ -144,10 +163,19 @@ export default class welcome extends Component {
             </TouchableOpacity>
 
             {/* two links for users to sign up and get password back */}
-            <Text style={[styles.bottomText, {marginTop: 12}]}>
-              Not have an account?
-            </Text>
-            <Text style={styles.bottomText}>Forget your password?</Text>
+            <TouchableOpacity
+              style={{marginTop: 12}}
+              onPress={() =>
+                this.props.navigation.navigate('signup', {
+                  returnData: this.returnData.bind(this),
+                })
+              }>
+              <Text style={styles.bottomText}>Not have an account?</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('getPassword')}>
+              <Text style={styles.bottomText}>Forget your password?</Text>
+            </TouchableOpacity>
           </View>
         </Animated.View>
       </Animated.View>
@@ -198,5 +226,5 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 16,
     marginTop: 12,
-  }
+  },
 });

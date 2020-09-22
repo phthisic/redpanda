@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import {
     View,
@@ -5,12 +6,12 @@ import {
     Button
   } from 'react-native';
 
-export default class login extends Component {
+export default class getPassword extends Component {
     render() {
         return (
             <View style={{flex:1, backgroundColor:'#258356', justifyContent:'center', alignItems:'center'}}>
-                <Text>login</Text>
-                <Button title="login" onPress={()=>this.props.navigation.navigate('Home')}></Button>
+                <Text>getPassword</Text>
+                <Button title="getPassword" onPress={()=>this.props.navigation.navigate('welcome')}></Button>
             </View>
         );
     }
