@@ -13,6 +13,7 @@ const TABS = {
   schedule: {
     screen: CameraNavigation,
     navigationOptions: {
+      // userId:this.props.navigation.state.params.userId,
       tabBarLabel: 'schedule',
       tabBarIcon: ({focused}) => {
         if (!focused) {
@@ -54,6 +55,10 @@ const TABS = {
 };
 
 class MainTabNavigator extends Component{
+  componentDidMount(){
+    console.log("tabhjer"+this.props.navigation.state.params.userId);
+}
+
   _tabnavigator(){
     const {schedule,healthdata,settingpage} = TABS;
     const tabs = {schedule,healthdata,settingpage};

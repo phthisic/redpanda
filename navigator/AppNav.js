@@ -8,6 +8,7 @@ import welcome from '../loginModule/welcome'
 // import schedule from '../pages/schedule'
 import MainTabNavigator from './TapNav';
 
+
 const LoginNavigation = createStackNavigator({
     welcome:{
         screen: welcome,
