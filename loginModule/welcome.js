@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
+
+import firestore from '@react-native-firebase/firestore';
 
 export default class welcome extends Component {
   constructor(props) {
@@ -70,23 +72,23 @@ export default class welcome extends Component {
 
   // four functions to change the color of the TextInput
   changeAccountColorBlue = () => {
-    this.setState({accountColor: '#779EEB'});
+    this.setState({ accountColor: '#779EEB' });
   };
   changePasswordColorBlue = () => {
-    this.setState({passwordColor: '#779EEB'});
+    this.setState({ passwordColor: '#779EEB' });
   };
   changeAccountColorGrey = () => {
     if (this.state.user_text == '') {
-      this.setState({accountColor: '#F55F5F'});
+      this.setState({ accountColor: '#F55F5F' });
     } else {
-      this.setState({accountColor: '#e0e0e0'});
+      this.setState({ accountColor: '#e0e0e0' });
     }
   };
   changePasswordColorGrey = () => {
     if (this.state.pass_text == '') {
-      this.setState({passwordColor: '#F55F5F'});
+      this.setState({ passwordColor: '#F55F5F' });
     } else {
-      this.setState({passwordColor: '#e0e0e0'});
+      this.setState({ passwordColor: '#e0e0e0' });
     }
   };
 
@@ -95,19 +97,68 @@ export default class welcome extends Component {
   // 3. set the border color if user does not input
   login = () => {
     if (this.state.user_text != '' && this.state.pass_text != '') {
-      this.setState({accountColor: '#e0e0e0'});
-      this.setState({passwordColor: '#e0e0e0'});
-      const {navigate} = this.props.navigation;
-      navigate('Home', {userId: this.state.user_text});
+      this.setState({ accountColor: '#e0e0e0' });
+      this.setState({ passwordColor: '#e0e0e0' });
+      const { navigate } = this.props.navigation;
+
+
+
+
+
+      // Lichao part  ||||| 23/09/2020   ||||| might be modified later
+      var matchedAccounts = [];
+      var matchedPasswords = [];
+      var inputUsername = this.state.user_text
+      var inputPassword = this.state.pass_text
+
+
+      firestore().collection("Users").where("Account", "==", inputUsername)
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            // doc.data() is never undefined for query doc snapshots
+            matchedAccounts.push(doc.data());
+          });
+          if (matchedAccounts.length == 0) {
+            window.alert("No such account exists!");
+          }
+          else {
+            firestore().collection("Users").where("Password", "==", inputPassword)
+              .get()
+              .then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                  // doc.data() is never undefined for query doc snapshots
+                  matchedPasswords.push(doc.data());
+                });
+                if (matchedPasswords.length != 0) {
+                  //pass the logged in username to Home
+                  navigate('Home', { userId: inputUsername });
+                }
+                else {
+                  window.alert("Incorrect Password!");
+                }
+              })
+          }
+        });
+
+
     } else {
       this.changeAccountColorGrey();
       this.changePasswordColorGrey();
     }
   };
 
+
+
+
+
+
+
+
+
   returnData(id, password) {
     // console.log(id + password);
-    this.setState({user_text: id, pass_text: password});
+    this.setState({ user_text: id, pass_text: password });
   }
 
   render() {
@@ -115,12 +166,12 @@ export default class welcome extends Component {
       <Animated.View
         style={[
           styles.container,
-          {paddingBottom: this.state.containerPadding, zIndex: -100},
+          { paddingBottom: this.state.containerPadding, zIndex: -100 },
         ]}>
         {/* icon picture and title */}
         <Animated.View
           style={{
-            transform: [{scale: this.state.pillScale}],
+            transform: [{ scale: this.state.pillScale }],
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
@@ -138,23 +189,23 @@ export default class welcome extends Component {
           }}>
           {/* two box for user to input */}
           <TextInput
-            style={[styles.inputBox, {borderColor: this.state.accountColor}]}
+            style={[styles.inputBox, { borderColor: this.state.accountColor }]}
             placeholder="Account"
             onFocus={() => this.changeAccountColorBlue()}
             onBlur={() => this.changeAccountColorGrey()}
             onChangeText={(user_text) =>
-              this.setState({user_text})
+              this.setState({ user_text })
             }></TextInput>
           <TextInput
-            style={[styles.inputBox, {borderColor: this.state.passwordColor}]}
+            style={[styles.inputBox, { borderColor: this.state.passwordColor }]}
             placeholder="Password"
             onFocus={() => this.changePasswordColorBlue()}
             onBlur={() => this.changePasswordColorGrey()}
             onChangeText={(pass_text) =>
-              this.setState({pass_text})
+              this.setState({ pass_text })
             }></TextInput>
 
-          <View style={{justifyContent: 'space-around', alignItems: 'center'}}>
+          <View style={{ justifyContent: 'space-around', alignItems: 'center' }}>
             {/* login button */}
             <TouchableOpacity
               style={styles.button}
@@ -164,7 +215,7 @@ export default class welcome extends Component {
 
             {/* two links for users to sign up and get password back */}
             <TouchableOpacity
-              style={{marginTop: 12}}
+              style={{ marginTop: 12 }}
               onPress={() =>
                 this.props.navigation.navigate('signup', {
                   returnData: this.returnData.bind(this),

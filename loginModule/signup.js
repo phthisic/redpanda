@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
   Text,
@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+
+import firestore from '@react-native-firebase/firestore';
 
 export default class signup extends Component {
   constructor(props) {
@@ -23,43 +25,43 @@ export default class signup extends Component {
   }
 
   AccountColorBlue = () => {
-    this.setState({newAccountColor: '#779EEB'});
+    this.setState({ newAccountColor: '#779EEB' });
   };
   EmailColorBlue = () => {
-    this.setState({emailColor: '#779EEB'});
+    this.setState({ emailColor: '#779EEB' });
   };
   PasswordColorBlue = () => {
-    this.setState({newPasswordColor: '#779EEB'});
+    this.setState({ newPasswordColor: '#779EEB' });
   };
   PasswordConfirmColorBlue = () => {
-    this.setState({passwordConfirmColor: '#779EEB'});
+    this.setState({ passwordConfirmColor: '#779EEB' });
   };
   AccountColorGrey = () => {
     if (this.state.user_text == '') {
-      this.setState({newAccountColor: '#F55F5F'});
+      this.setState({ newAccountColor: '#F55F5F' });
     } else {
-      this.setState({newAccountColor: '#e0e0e0'});
+      this.setState({ newAccountColor: '#e0e0e0' });
     }
   };
   EmailColorGrey = () => {
     if (this.state.user_email == '') {
-      this.setState({emailColor: '#F55F5F'});
+      this.setState({ emailColor: '#F55F5F' });
     } else {
-      this.setState({emailColor: '#e0e0e0'});
+      this.setState({ emailColor: '#e0e0e0' });
     }
   };
   PasswordColorGrey = () => {
     if (this.state.pass_text == '') {
-      this.setState({newPasswordColor: '#F55F5F'});
+      this.setState({ newPasswordColor: '#F55F5F' });
     } else {
-      this.setState({newPasswordColor: '#e0e0e0'});
+      this.setState({ newPasswordColor: '#e0e0e0' });
     }
   };
   PasswordConfirmColorGrey = () => {
     if (this.state.pass_confirm == '') {
-      this.setState({passwordConfirmColor: '#F55F5F'});
+      this.setState({ passwordConfirmColor: '#F55F5F' });
     } else {
-      this.setState({passwordConfirmColor: '#e0e0e0'});
+      this.setState({ passwordConfirmColor: '#e0e0e0' });
     }
   };
 
@@ -69,20 +71,62 @@ export default class signup extends Component {
       this.state.pass_text != '' &&
       this.state.pass_text == this.state.pass_confirm
     ) {
-      this.setState({newAccountColor: '#e0e0e0'});
-      this.setState({emailColor: '#e0e0e0'});
-      this.setState({newPasswordColor: '#e0e0e0'});
-      this.setState({passwordConfirmColor: '#e0e0e0'});
-      const {navigate} = this.props.navigation;
+      this.setState({ newAccountColor: '#e0e0e0' });
+      this.setState({ emailColor: '#e0e0e0' });
+      this.setState({ newPasswordColor: '#e0e0e0' });
+      this.setState({ passwordConfirmColor: '#e0e0e0' });
+      const { navigate } = this.props.navigation;
+
+      var inputUsername = this.state.user_text
+      var inputEmail = this.state.user_email
+      var inputPassword = this.state.pass_text
+
+
+      // Lichao part  ||||| 23/09/2020   ||||| might be modified later
+      var duplicateAccounts = [];
+      firestore().collection("Users").where("Account", "==", inputUsername)
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            // doc.data() is never undefined for query doc snapshots
+            duplicateAccounts.push(doc.data());
+          });
+          if (duplicateAccounts.length != 0) {
+            window.alert("Account already exists!");
+          }
+          else {
+            firestore().collection("Users").add({
+              Account: inputUsername,
+              Email: inputEmail,
+              Password: inputPassword
+            })
+              .then(function (docRef) {
+                console.log("Document written with ID: ", docRef.id);
+              })
+              .catch(function (error) {
+                console.error("Error adding document: ", error);
+              });
+            //pass the logged in username to Home
+            navigate('Home', { userId: inputUsername });
+          }
+        })
+
+
+
+
+
+
+
+
       //   navigate('welcome', {
       //     userId: this.state.user_text,
       //     userPass: this.state.pass_text,
       //   });
-      this.props.navigation.state.params.returnData(
-        this.state.user_text,
-        this.state.pass_text,
-      );
-      this.props.navigation.goBack();
+      //this.props.navigation.state.params.returnData(
+      //  this.state.user_text,
+      //  this.state.pass_text,
+      //);
+      //this.props.navigation.goBack();     <---- comment by lichao ||||| 23/09/2020 ||||| can be modified
     } else {
       this.AccountColorGrey();
       this.PasswordColorGrey();
@@ -97,42 +141,42 @@ export default class signup extends Component {
         <Text style={styles.title}>SIGN UP</Text>
         <View>
           <TextInput
-            style={[styles.inputBox, {borderColor: this.state.newAccountColor}]}
+            style={[styles.inputBox, { borderColor: this.state.newAccountColor }]}
             placeholder="Account"
             onFocus={() => this.AccountColorBlue()}
             onBlur={() => this.AccountColorGrey()}
             onChangeText={(user_text) =>
-              this.setState({user_text})
+              this.setState({ user_text })
             }></TextInput>
           <TextInput
-            style={[styles.inputBox, {borderColor: this.state.emailColor}]}
+            style={[styles.inputBox, { borderColor: this.state.emailColor }]}
             placeholder="email"
             onFocus={() => this.EmailColorBlue()}
             onBlur={() => this.EmailColorGrey()}
             onChangeText={(user_email) =>
-              this.setState({user_email})
+              this.setState({ user_email })
             }></TextInput>
           <TextInput
             style={[
               styles.inputBox,
-              {borderColor: this.state.newPasswordColor},
+              { borderColor: this.state.newPasswordColor },
             ]}
             placeholder="Password"
             onFocus={() => this.PasswordColorBlue()}
             onBlur={() => this.PasswordColorGrey()}
             onChangeText={(pass_text) =>
-              this.setState({pass_text})
+              this.setState({ pass_text })
             }></TextInput>
           <TextInput
             style={[
               styles.inputBox,
-              {borderColor: this.state.passwordConfirmColor},
+              { borderColor: this.state.passwordConfirmColor },
             ]}
             placeholder="Password confirm"
             onFocus={() => this.PasswordConfirmColorBlue()}
             onBlur={() => this.PasswordConfirmColorGrey()}
             onChangeText={(pass_confirm) =>
-              this.setState({pass_confirm})
+              this.setState({ pass_confirm })
             }></TextInput>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText} onPress={() => this.signup()}>

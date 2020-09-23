@@ -7,7 +7,7 @@ import {
     TouchableHighlight
 } from 'react-native';
 
-import {RNCamera, TakePictureResponse} from 'react-native-camera';
+import { RNCamera, TakePictureResponse } from 'react-native-camera';
 
 export default class ReactNativeDemo extends Component {
 
@@ -15,18 +15,18 @@ export default class ReactNativeDemo extends Component {
     state = { cameraType: RNCamera.Constants.Type.back };
 
     //scan QRcode
-    _onBarCodeRead(e){
+    _onBarCodeRead(e) {
         //data: string;
         //rawData?: string;
         //type: keyof BarCodeType;
         //bounds:
-          //For iOS use `{ origin: Point<string>, size: Size<string> }`
-          //For Android use `{ width: number, height: number, origin: Array<Point<string>> }`
+        //For iOS use `{ origin: Point<string>, size: Size<string> }`
+        //For Android use `{ width: number, height: number, origin: Array<Point<string>> }`
         console.log(e)
     }
 
     //switch direction     undefined is not an object (evaluating 'state.cameraType')
-    _switchCamera(){
+    _switchCamera() {
         this.setState({
             cameraType: (this.state.cameraType === RNCamera.Constants.Type.back) ?
                 RNCamera.Constants.Type.front : RNCamera.Constants.Type.back
@@ -37,11 +37,11 @@ export default class ReactNativeDemo extends Component {
         // this.setState(state);
     }
 
-    _takePicture(){
-        this.refs.camera.takePictureAsync().then( (response) => {
-            console.log("response.uri:"+response.uri)
+    _takePicture() {
+        this.refs.camera.takePictureAsync().then((response) => {
+            console.log("response.uri:" + response.uri)
         }).catch((error => {
-            console.log("error:"+error)
+            console.log("error:" + error)
         }))
     }
 

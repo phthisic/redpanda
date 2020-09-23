@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {Text} from 'react-native';
+import React, { Component } from 'react';
+import { Text } from 'react-native';
 
-import {createAppContainer} from 'react-navigation';
-import {createBottomTabNavigator, BottomTabBar} from 'react-navigation-tabs';
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs';
 // import schedule from '../pages/schedule';
 import healthdata from '../pages/healthdata';
 import settingpage from '../pages/settingpage';
@@ -15,7 +15,7 @@ const TABS = {
     navigationOptions: {
       // userId:this.props.navigation.state.params.userId,
       tabBarLabel: 'schedule',
-      tabBarIcon: ({focused}) => {
+      tabBarIcon: ({ focused }) => {
         if (!focused) {
           return <Text>s1</Text>;
         } else {
@@ -29,7 +29,7 @@ const TABS = {
     screen: healthdata,
     navigationOptions: {
       tabBarLabel: 'healthdata',
-      tabBarIcon: ({focused}) => {
+      tabBarIcon: ({ focused }) => {
         if (!focused) {
           return <Text>h1</Text>;
         } else {
@@ -43,7 +43,7 @@ const TABS = {
     screen: settingpage,
     navigationOptions: {
       tabBarLabel: 'settingpage',
-      tabBarIcon: ({focused}) => {
+      tabBarIcon: ({ focused }) => {
         if (!focused) {
           return <Text>s3</Text>;
         } else {
@@ -54,25 +54,31 @@ const TABS = {
   }
 };
 
-class MainTabNavigator extends Component{
-  componentDidMount(){
-    console.log("tabhjer"+this.props.navigation.state.params.userId);
-}
+class MainTabNavigator extends Component {
+  componentDidMount() {
+    console.log("tabhjer" + this.props.navigation.state.params.userId);
+  }
 
-  _tabnavigator(){
-    const {schedule,healthdata,settingpage} = TABS;
-    const tabs = {schedule,healthdata,settingpage};
-    if(!this.tabNavigator){
+ 
+   aaa = this.props.navigation.state.params.userId
+
+
+  _tabnavigator() {
+    const { schedule, healthdata, settingpage } = TABS;
+    const tabs = { schedule, healthdata, settingpage };
+    if (!this.tabNavigator) {
       this.tabNavigator = createAppContainer(createBottomTabNavigator(
-        tabs,{tabBarComponent: props => (
-          <BottomTabBar {...props}/>
-        ),}
+        tabs, {
+        tabBarComponent: props => (
+          <BottomTabBar {...props} />
+        ),
+      }
       ))
     }
     return this.tabNavigator;
   }
 
-  render(){
+  render() {
     const TabNavigator = this._tabnavigator();
     return <TabNavigator></TabNavigator>
   }
