@@ -1,31 +1,31 @@
 # Project PillX
 #### Team Red Panda
-# Use the apk
-The apk can be used on Android Phone.  
-You can either login with account "test" and password "111", or create a new account by using sign up function.
-note that a new account might not include information of health data page.  
+## Use the apk
+1. The apk can be used on Android Phone.  
+2. You can either login with account "test" and password "111", or create a new account by using sign up function.
+3. note that a new account might not include information of health data page.  
 #### login module (PillX > pages > loginModule)  
 1. This mocule includes pages of welcome, signup and getPassword.
 2. Users are able to create new account or login with an exist account.
 3. getPassword function is waiting to be built.
 #### schedule module (PillX > pages > scheduleModule)  
-# Run the Source Code
-download the package
-start your android emulator
-open the folder with your editer
-run the project with `yarn react-native run-android` or `yarn android`
-To avoid some potencial error, you can enter the "android" folder and use `./gradlew clean`
-If the error shows any missing package, please refer to the API reference below.
 
+## Run the Source Code
+1. download the package
+2. start your android emulator
+3. open the folder with your editer
+4. run the project with `yarn react-native run-android` or `yarn android`
+5. To avoid some potencial error, you can enter the "android" folder and use `./gradlew clean`
+6. If the error shows any missing package, please refer to the API reference below.
 
-## Team Red Panda
 ## Team member:
 Lichao Song: back-end coder, database building  
 Rui Tian: front-end coder, schedule page building  
 Yan Sui: front-end coder, health data page building  
 Yifan Wu: designer  
 Zhuoran Li: front-end coder, medicine information page, setting page, login module building  
-# API reference
+
+## API reference
 [react-navigation](https://reactnavigation.org/)  
 [react-native-reanimated](https://www.npmjs.com/package/react-native-reanimated)  
 [react-native-camera](https://github.com/react-native-camera/react-native-camera)  
