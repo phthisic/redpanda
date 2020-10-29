@@ -1,5 +1,8 @@
 # Project PillX
 #### Team Red Panda
+[Project demonstration video](https://youtu.be/rjBzclieww8)
+[Prototype function demonstration video](https://www.youtube.com/watch?v=UbGwiBAD5h4)
+
 ## Use the apk
 1. The apk can be used on Android Phone.  
 2. You can either login with account "test" and password "111", or create a new account by using sign up function.
