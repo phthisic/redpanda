@@ -1,3 +1,5 @@
+# Project PillX
+#### Team Red Panda
 # Use the apk
 The apk can be used on Android Phone.  
 You can either login with account "test" and password "111", or create a new account by using sign up function.
