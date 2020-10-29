@@ -1,17 +1,21 @@
-# RedPanda
-This is the workspace for team redpanda of DECO3801/7381 (uq)  
 # Use the apk
 The apk can be used on Android Phone.  
 You can either login with account "test" and password "111", or create a new account by using sign up function.
-note that a new account might not include information of health data page.
+note that a new account might not include information of health data page.  
+#### login module (PillX > pages > loginModule)  
+1. This mocule includes pages of welcome, signup and getPassword.
+2. Users are able to create new account or login with an exist account.
+3. getPassword function is waiting to be built.
+#### schedule module (PillX > pages > scheduleModule)  
 # Run the Source Code
-1. download the package
-2. start your android emulator
-3. open the folder with your editer
-4. To avoid some potencial error, you can enter the "android" folder and use
-`./gradlew clean`
-5. If the error shows any missing package, please refer to the API reference below.
-#Project: PillX
+download the package
+start your android emulator
+open the folder with your editer
+run the project with `yarn react-native run-android` or `yarn android`
+To avoid some potencial error, you can enter the "android" folder and use `./gradlew clean`
+If the error shows any missing package, please refer to the API reference below.
+
+
 ## Team Red Panda
 ## Team member:
 Lichao Song: back-end coder, database building  
