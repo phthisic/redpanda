@@ -1,6 +1,6 @@
 # Project PillX
 #### Team Red Panda
-[Project demonstration video](https://youtu.be/rjBzclieww8)
+[Project demonstration video](https://youtu.be/rjBzclieww8)  
 [Prototype function demonstration video](https://www.youtube.com/watch?v=UbGwiBAD5h4)
 
 ## Use the apk
